@@ -186,29 +186,14 @@ var querystrings = {
 
         let returnUrl = window.location.href.split('?')[0];
 
-        let triggers = document.querySelectorAll(".qstring-trigger");
-        triggers.forEach(trigger => {
-            trigger.setAttribute("href", returnUrl + "?" + decodeURIComponent(searchParams.toString()));
-        });
+        let trigger = document.getElementById("qstring-trigger");
+        trigger.setAttribute("href", returnUrl + "?" + decodeURIComponent(searchParams.toString()));
 
         if (auto === "true")
-            triggers[0].click();
+            trigger[0].click();
     }
 
 };
-
-querystrings.qContainers.forEach(container => {
-    if (!$(`[data-ajax-bind="${container.dataset.ajaxContainer}"]`)) {
-        var t = document.createElement("a");
-        t.href = "#";
-        t.classList.add("qstring-trigger");
-        t.setAttribute("data-ajax-bind", container.dataset.ajaxContainer);
-        t.setAttribute("aria-hidden", "true");
-        t.setAttribute("style", "display: none");
-
-        document.body.appendChild(t);
-    }
-});
 
 querystrings.qInputs.forEach(input => {
     querystrings.loadInput(input);
